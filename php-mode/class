@@ -1,7 +1,11 @@
 #contributor : Satoshi Nishimura <nishim314@gmail.com>
+#contributor : Jacek Wysocki <jacek.wysocki@gmail.com>
 #name : class ... 
 #group : definitions
 # --
+/**
+ * @author Jacek Wysocki <jacek.wysocki@gmail.com>
+ */
 class ${1:`(replace-regexp-in-string
  "^_+" ""
  (mapconcat
@@ -15,8 +19,13 @@ class ${1:`(replace-regexp-in-string
     (file-name-sans-extension (buffer-file-name))
     ) "/") "_"))`}
 {
-   public function __construct()
-   {
-      $0
-   }
+    public function __construct($options=array())
+    {
+        if (is_array($options)) {
+            foreach ($options as $k => $v) {
+                $this->$k = $v;
+            }
+        }
+        $0
+    }
 }
